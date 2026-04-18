@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khmer SRT to Speech</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎙️ Khmer SRT to Speech</h1>
+    <p class="subtitle">បំលែងឯកសារ SRT ជាសំឡេងខ្មែរ</p>
+
+    <div class="upload-section">
+      <label for="srtFile" class="upload-label">
+        📂 ជ្រើសរើសឯកសារ SRT
+      </label>
+      <input type="file" id="srtFile" accept=".srt" />
+      <span id="fileName">មិនទាន់ជ្រើសរើស</span>
+    </div>
+
+    <div class="voice-section">
+      <label for="voiceSelect">🗣️ ជ្រើសរើសសំឡេង:</label>
+      <div class="voice-row">
+        <select id="voiceSelect">
+          <option value="">កំពុងផ្ទុក...</option>
+        </select>
+        <button id="btnRefreshVoices" class="btn-refresh" title="ផ្ទុកសំឡេងម្តងទៀត">🔄</button>
+      </div>
+      <div id="voiceWarning" class="voice-warning" style="display:none;">
+        ⚠️ <strong>រកមិនឃើញ Microsoft Khmer voice!</strong><br/>
+        សូម Install តាមជំហានខាងក្រោម:<br/>
+        <ol style="margin:8px 0 8px 18px; line-height:2;">
+          <li><a href="ms-settings:regionlanguage" target="_blank">Settings → Time &amp; Language → Language &amp; region</a></li>
+          <li>ចុច <strong>"Add a language"</strong> → ស្វែងរក <strong>ខ្មែរ (Khmer)</strong></li>
+          <li>ដំឡើង → ធ្វើ checkmark លើ <strong>"Text-to-speech"</strong> → Install</li>
+          <li>បន្ទាប់ពី Install រួច restart Edge/Chrome រួចចុច 🔄</li>
+        </ol>
+        <em>Voices ដែលនឹងបង្ហាញ: <strong>Microsoft Sreymom</strong> (ស្ត្រី) &amp; <strong>Microsoft Piseth</strong> (បុរស)</em>
+      </div>
+      <div class="rate-control">
+        <label for="rateRange">⚡ល្បឿន: <span id="rateValue">1.0</span>x</label>
+        <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1.0" />
+      </div>
+      <div class="pitch-control">
+        <label for="pitchRange">🎵 សំឡេង: <span id="pitchValue">1.0</span></label>
+        <input type="range" id="pitchRange" min="0.5" max="2" step="0.1" value="1.0" />
+      </div>
+    </div>
+
+    <div class="preview-section" id="previewSection" style="display:none;">
+      <h2>📋 មាតិកា SRT</h2>
+      <div id="srtList" class="srt-list"></div>
+    </div>
+
+    <div class="controls">
+      <button id="btnPlay" class="btn btn-play" disabled>▶ ចាក់</button>
+      <button id="btnPause" class="btn btn-pause" disabled>⏸ ផ្អាក</button>
+      <button id="btnStop" class="btn btn-stop" disabled>⏹ បញ្ឈប់</button>
+    </div>
+
+    <div class="progress-section" id="progressSection" style="display:none;">
+      <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+      <p id="progressText">ជំហានទី <span id="currentIdx">0</span> / <span id="totalIdx">0</span></p>
+      <div id="currentSubtitle" class="current-subtitle"></div>
+    </div>
+
+    <div class="export-section" id="exportSection" style="display:none;">
+      <h2>💾 នាំចេញ</h2>
+      <button id="btnExport" class="btn btn-export">📥 ទាញយក MP3 (ផ្សំសំឡេង)</button>
+      <p class="export-note">* ប្រើ Web Speech API — ការថតត្រូវការ browser ដែលគាំទ្រ</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
